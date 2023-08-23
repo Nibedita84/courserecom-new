@@ -1,0 +1,22 @@
+columns:
+  - index: object
+  - _id: object
+  - platformType: object
+  - tags: object
+  - labPlans: object
+  - mode: object
+  - categoryId: object
+  - seo: object
+  - description: object
+  - mobilePricing: object
+  - videoURL: object
+  - classTimings: object
+  - batches: object
+  - createdAt: object
+  - img: object
+  - courseMeta:  object
+  - instructorsDetails: object
+  - pricing: object
+  - courseInOneNeuron: object
+
+

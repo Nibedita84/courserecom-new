@@ -1,0 +1,6 @@
+[2023-08-03 16:20:05,971 ] 23 root - INFO - saving data into the feature store
+[2023-08-03 16:20:05,971 ] 15 root - INFO - create class object
+[2023-08-03 16:20:10,013 ] 32 root - INFO - saved the data to the feature store file
+[2023-08-03 16:20:10,024 ] 62 root - INFO - validating number of columns in the dataframe
+[2023-08-03 16:20:10,024 ] 29 root - INFO - required number of columns: 19
+[2023-08-03 16:20:10,024 ] 30 root - INFO - columns in the dataframe: 19

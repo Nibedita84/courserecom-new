@@ -1,0 +1,3 @@
+[2023-07-27 13:49:57,288 ] 23 root - INFO - saving data into the feature store
+[2023-07-27 13:49:57,288 ] 15 root - INFO - create class object
+[2023-07-27 13:49:58,871 ] 32 root - INFO - saved the data to the feature store file

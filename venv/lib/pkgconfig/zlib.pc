@@ -1,0 +1,13 @@
+prefix=/Users/ndeka/Documents/Others/ML_projects/Course Recommender/venv
+exec_prefix=/Users/ndeka/Documents/Others/ML_projects/Course Recommender/venv
+libdir=/Users/ndeka/Documents/Others/ML_projects/Course Recommender/venv/lib
+sharedlibdir=/Users/ndeka/Documents/Others/ML_projects/Course Recommender/venv/lib
+includedir=/Users/ndeka/Documents/Others/ML_projects/Course Recommender/venv/include
+
+Name: zlib
+Description: zlib compression library
+Version: 1.2.13
+
+Requires:
+Libs: -L${libdir} -L${sharedlibdir} -lz
+Cflags: -I${includedir}

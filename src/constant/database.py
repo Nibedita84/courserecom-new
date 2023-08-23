@@ -1,0 +1,1 @@
+SITE_LINK = 'https://ineuron.ai/courses'
