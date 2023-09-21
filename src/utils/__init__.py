@@ -35,3 +35,10 @@ def collapse1(L):
         for j in i:
             L1.append(j)
     return L1
+
+
+def recommend(course, similarity): 
+    index = finald[finald['Title'] == course].index[0]
+    distances = sorted(list(enumerate(similarity[index])),reverse=True,key = lambda x: x[1])
+    for i in distances[1:6]:
+        print(finald.iloc[i[0]].Title)

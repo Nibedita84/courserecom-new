@@ -13,14 +13,16 @@ from src.utils import read_yaml_file
 import os, sys
 import pandas as pd
 import requests
+from ast import literal_eval       ### this is required to be able to avoid any issues while parsing json columns in the dataframe
 
 class DataTransformation:
-    try:
-        def __init__(self, data_transformation_config: DataTransformationConfig, data_validation_artifact: DataValidationArtifact):
+
+    def __init__(self, data_transformation_config: DataTransformationConfig, data_validation_artifact: DataValidationArtifact):
+        try:
             self.data_transformation_config = data_transformation_config
             self.data_validation_artifact = data_validation_artifact
-    except Exception as e:
-        raise CourseRecomException(e, sys)
+        except Exception as e:
+            raise CourseRecomException(e, sys)
 
 
     @staticmethod
@@ -34,7 +36,7 @@ class DataTransformation:
     def extract_from_json(text):
         L = []
         for i in text:
-            L.append(i[0]['name']) 
+            L.append(i['name']) 
         return L
     
     @staticmethod
@@ -64,8 +66,8 @@ class DataTransformation:
     def transform_data(self) -> DataTransformationArtifact:
         try:
             df = DataTransformation.read_data(self.data_validation_artifact.valid_file_name)
-            df["instructorsDetails1"] = df["instructorsDetails"].apply(DataTransformation.extract_from_json)
-            df['learning'] = df['courseMeta'].apply(DataTransformation.extract_from_json1)
+            df["instructorsDetails1"] = df["instructorsDetails"].apply(literal_eval).apply(DataTransformation.extract_from_json)
+            df['learning'] = df['courseMeta'].apply(literal_eval).apply(DataTransformation.extract_from_json1)
             finaldf = df[["index","_id","description","instructorsDetails1", "learning"]]
             finaldf['instructorsDetails1'] = finaldf['instructorsDetails1'].apply(DataTransformation.remove_extra_characters)
             finaldf['description'] = finaldf['learning'].apply(DataTransformation.remove_extra_characters1)

@@ -18,3 +18,8 @@ class DataTransformationArtifact:
     transformed_data_path: str
     transformed_file: str
 
+@dataclass
+class ModelTrainerArtifact:
+    trained_model_dir: str
+
+

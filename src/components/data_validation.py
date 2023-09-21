@@ -59,7 +59,7 @@ class DataValidation:
         try:
             error_message = ""
             data_file = self.data_ingestion_artifact.data_file_path
-            data = DataValidation.read_data(data_file)
+            data = DataValidation.read_data(data_file)    ## we are 
 
             logging.info(f'validating number of columns in the dataframe')
 

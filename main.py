@@ -7,6 +7,8 @@ from src.entity.artifact import DataIngestionArtifact, DataTransformationArtifac
 from src.entity.config import DataValidationConfig, DataTransformationConfig
 from src.components.data_validation  import DataValidation
 from src.components.data_transformation import DataTransformation
+from src.components.model_trainer import ModelTrainer
+from src.entity.config import ModelTrainerConfig
 from src.entity.config import TrainingPipelineConfig
 from src.constant import training_pipeline
 from src.constant.database import SITE_LINK
@@ -29,7 +31,8 @@ if __name__ == "__main__":
         data_ingest = DataIngestion(data_ingestion_config=DataIngestionConfig(training_pipeline_config=TrainingPipelineConfig()))
         x = DataValidation(DataValidationConfig(TrainingPipelineConfig()), data_ingest.initiate_data_ingestion())
         y = DataTransformation(DataTransformationConfig(TrainingPipelineConfig()), x.initiate_data_validation())
-        y.transform_data()
+        z = ModelTrainer(ModelTrainerConfig(TrainingPipelineConfig()),y.transform_data())
+        z.initiate_model_training()
         ###x.initiate_data_validation()
 
     except Exception as e:
