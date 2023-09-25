@@ -10,6 +10,9 @@ from src.components.data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 from src.entity.config import ModelTrainerConfig
 from src.entity.config import TrainingPipelineConfig
+from src.entity.config import ModelPusherConfig
+from src.components.model_pusher import ModelPusher
+from src.entity.artifact import ModelPusherArtifact
 from src.constant import training_pipeline
 from src.constant.database import SITE_LINK
 from src.constant.training_pipeline import SCHEMA_FILE_PATH
@@ -32,7 +35,8 @@ if __name__ == "__main__":
         x = DataValidation(DataValidationConfig(TrainingPipelineConfig()), data_ingest.initiate_data_ingestion())
         y = DataTransformation(DataTransformationConfig(TrainingPipelineConfig()), x.initiate_data_validation())
         z = ModelTrainer(ModelTrainerConfig(TrainingPipelineConfig()),y.transform_data())
-        z.initiate_model_training()
+        a = ModelPusher(ModelPusherConfig(TrainingPipelineConfig()), z.initiate_model_training())
+        a.initiate_model_pusher()
         ###x.initiate_data_validation()
 
     except Exception as e:

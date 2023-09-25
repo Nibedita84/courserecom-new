@@ -38,3 +38,12 @@ class ModelTrainerConfig:
         self.data_trainer_dir_name = os.path.join(training_pipleine_config.artifact_dir, training_pipeline.MODEL_TRAINER_DIR_NAME)
         self.data_trainer_dir = os.path.join(self.data_trainer_dir_name, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_DIR)
         self.data_trainer_file = os.path.join(self.data_trainer_dir, training_pipeline.MODEL_TRAINER_TRAINED_MODEL_NAME)
+
+
+
+class ModelPusherConfig:
+    def __init__(self, training_pipeline_config: TrainingPipelineConfig):
+        self.model_pusher_dir_name = os.path.join(training_pipeline_config.artifact_dir, training_pipeline.MODEL_PUSHER_DIR_NAME)
+        self.model_pusher_file = os.path.join(self.model_pusher_dir_name, training_pipeline.MODEL_FILE_NAME)
+        timestamp = round(datetime.datetime.now().timestamp())
+        self.saved_model_path = os.path.join(training_pipeline.SAVED_MODEL_DIR, f"{timestamp}", training_pipeline.MODEL_FILE_NAME)

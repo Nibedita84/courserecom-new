@@ -65,6 +65,7 @@ class DataTransformation:
 
     def transform_data(self) -> DataTransformationArtifact:
         try:
+            logging.info("reading the data file")
             df = DataTransformation.read_data(self.data_validation_artifact.valid_file_name)
             df["instructorsDetails1"] = df["instructorsDetails"].apply(literal_eval).apply(DataTransformation.extract_from_json)
             df['learning'] = df['courseMeta'].apply(literal_eval).apply(DataTransformation.extract_from_json1)
@@ -75,6 +76,8 @@ class DataTransformation:
             finaldf['tags1'] = [' '.join(map(str, l)) for l in finaldf['tags']]
             finaldf = finaldf.drop(['instructorsDetails1', 'description','learning'], axis = 1)
 
+            logging.info("file read and transformed. Saving the transformed data file")
+
             transformed_data_file_dir = self.data_transformation_config.data_transformation_file_name
             dir_path = os.path.dirname(transformed_data_file_dir)
             if not os.path.exists(dir_path):
@@ -83,6 +86,8 @@ class DataTransformation:
                 finaldf.to_csv(self.data_transformation_config.data_transformation_file_name, index = False, header = True)
 
             data_transformation_artifact = DataTransformationArtifact(transformed_data_path = self.data_transformation_config.data_transformation_dir, transformed_file = self.data_transformation_config.data_transformation_file_name)
+
+            logging.info("data transformation complete and file saved")
 
             return data_transformation_artifact
 

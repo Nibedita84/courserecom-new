@@ -1,5 +1,8 @@
 import os
 
+SAVED_MODEL_DIR =os.path.join("saved_models")
+MODEL_FILE_NAME: str = "model.pkl"
+
 ### Defining common constant variables for training Pipeline
 DATA_LINK = 'https://ineuron.ai/courses'
 PIPELINE_NAME: str = "courserecom"
@@ -41,8 +44,9 @@ MODEL_TRAINER_TRAINED_MODEL_NAME: str = "model.pkl"
 
 
 
-### Model Evaluation Constants
+### Model Pusher Constants
 
-
+MODEL_PUSHER_DIR_NAME: str = "model_pusher"
+MODEL_PUSHER_SAVED_MODEL_DIR: str = SAVED_MODEL_DIR
 
 

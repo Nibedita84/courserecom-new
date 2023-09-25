@@ -49,15 +49,18 @@ class ModelTrainer:
 
     def initiate_model_training(self)  -> ModelTrainerArtifact:
         try:
+            logging.info("starting model training")
             training_file_path = self.data_transformation_artifact.transformed_file
             model = self.train_model(training_file_path)
             model_dir_path = os.path.dirname(self.model_trainer_config.data_trainer_file)
             os.makedirs(model_dir_path, exist_ok = True)
-            pickle.dump(model, open(self.model_trainer_config.data_trainer_file, 'wb'))
+            pickle.dump(model, open(self.model_trainer_config.data_trainer_file, 'wb'))   ##saving the model
         
-            model_trainer_artifact = ModelTrainerArtifact(trained_model_dir = self.model_trainer_config.data_trainer_dir)
+            model_trainer_artifact = ModelTrainerArtifact(trained_model_dir = self.model_trainer_config.data_trainer_file)
 
-            return model
+            logging.info("model training completed")
+
+            return model_trainer_artifact
         except Exception as e:
             raise CourseRecomException(e, sys)
 

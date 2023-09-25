@@ -22,4 +22,9 @@ class DataTransformationArtifact:
 class ModelTrainerArtifact:
     trained_model_dir: str
 
+@dataclass
+class ModelPusherArtifact:
+    saved_model_path: str
+    model_file_path: str
+
 
