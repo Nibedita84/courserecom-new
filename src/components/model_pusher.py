@@ -28,7 +28,6 @@ class ModelPusher:
         try:
             self.model_pusher_config = model_pusher_config
             self.model_trainer_artifact = model_trainer_artifact
-            pass
         except Exception as e:
             raise CourseRecomException(e, sys)
         
@@ -55,4 +54,4 @@ class ModelPusher:
             raise CourseRecomException(e, sys) 
         
         
-    
+        

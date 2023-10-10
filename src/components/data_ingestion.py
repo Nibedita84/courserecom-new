@@ -6,6 +6,7 @@ from src.constant.database import SITE_LINK
 from src.data_access.courserecom_data import CourseRecomData
 import os, sys
 import pandas as pd
+import pickle
 import requests
 
 
@@ -30,15 +31,18 @@ class DataIngestion:
             os.makedirs(dir_path)
             data.to_csv(feature_store_file_path, index = False, header = True)
             logging.info("saved the data to the feature store file")
+
+            pickle.dump(data.to_dict(), open('courses.pkl', 'wb'))
+            logging.info("scraped data saved")
+
             return data
-        
         except Exception as e:
             raise CourseRecomException(e, sys)
         
     def initiate_data_ingestion(self) -> DataIngestionArtifact:
         try:
             dataframe = self.export_data_into_feature_store(SITE_LINK)
-            data_ingestion_artifact = DataIngestionArtifact(data_file_path= self.data_ingestion_config.feature_store_file_path)
+            data_ingestion_artifact = DataIngestionArtifact(data_file_path= self.data_ingestion_config.feature_store_file_path )
             return data_ingestion_artifact
         except Exception as e:
             raise CourseRecomException(e, sys) 

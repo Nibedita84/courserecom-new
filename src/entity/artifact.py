@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass
 class DataIngestionArtifact:
     data_file_path: str
-    ###initial_dump: str
+    ##initial_dump: str
 
 
 @dataclass

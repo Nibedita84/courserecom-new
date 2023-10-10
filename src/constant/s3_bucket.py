@@ -1,0 +1,1 @@
+TRAINING_BUCKET_NAME = "course-recom-pipeline"

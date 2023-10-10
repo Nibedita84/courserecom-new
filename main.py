@@ -16,6 +16,7 @@ from src.entity.artifact import ModelPusherArtifact
 from src.constant import training_pipeline
 from src.constant.database import SITE_LINK
 from src.constant.training_pipeline import SCHEMA_FILE_PATH
+from training_pipeline.training_pipeline import TrainingPipeline
 import sys
 
 
@@ -29,7 +30,7 @@ import sys
         raise CourseRecomException(e, sys)
    """ 
    
-if __name__ == "__main__":
+"""if __name__ == "__main__":
     try:
         data_ingest = DataIngestion(data_ingestion_config=DataIngestionConfig(training_pipeline_config=TrainingPipelineConfig()))
         x = DataValidation(DataValidationConfig(TrainingPipelineConfig()), data_ingest.initiate_data_ingestion())
@@ -42,3 +43,10 @@ if __name__ == "__main__":
     except Exception as e:
         raise CourseRecomException(e, sys)
     
+"""
+
+if __name__ == "__main__":
+    try:
+        TrainingPipeline().run_pipeline()
+    except Exception as e:
+        raise CourseRecomException(e, sys)

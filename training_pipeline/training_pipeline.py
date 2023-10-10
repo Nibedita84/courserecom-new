@@ -15,7 +15,11 @@ from src.components.model_pusher import ModelPusher
 from src.entity.artifact import ModelPusherArtifact
 from src.constant import training_pipeline
 from src.constant.database import SITE_LINK
-from src.constant.training_pipeline import SCHEMA_FILE_PATH
+from src.constant.training_pipeline import SCHEMA_FILE_PATH, SAVED_MODEL_DIR
+from src.cloud_storage.s3_syncer import S3sync
+from src.constant.s3_bucket import TRAINING_BUCKET_NAME
+import pandas as pd
+import pickle
 
 import sys
 
@@ -25,7 +29,7 @@ class TrainingPipeline:
     
     def __init__(self):
         self.training_pipeline_config = TrainingPipelineConfig()
-        self.s3_sync = S3Sync()
+        self.s3_sync = S3sync()
 
 
 
@@ -73,15 +77,15 @@ class TrainingPipeline:
         
     def start_model_pusher(self, model_trainer_artifact = ModelPusherArtifact) -> ModelPusherArtifact:
         try:
-            model_pusher_config = ModelPusher(training_pipeline_config = self.training_pipeline_config)
+            model_pusher_config = ModelPusherConfig(training_pipeline_config = self.training_pipeline_config)
             model_pusher = ModelPusher(model_trainer_artifact = model_trainer_artifact, model_pusher_config = model_pusher_config)
-            model_pusher_artifact = model_pusher_artifact.initiate_model_pusher()
+            model_pusher_artifact = model_pusher.initiate_model_pusher()
             return model_pusher_artifact
         except Exception as e:
             raise CourseRecomException(e, sys)
         
 
-    def sync_artifact_dir_to_s3(self):
+    """def sync_artifact_dir_to_s3(self):
         try:
             aws_buket_url = f"s3://{TRAINING_BUCKET_NAME}/artifact/{self.training_pipeline_config.timestamp}"
             self.s3_sync.sync_folder_to_s3(folder = self.training_pipeline_config.artifact_dir,aws_buket_url=aws_buket_url)
@@ -94,31 +98,38 @@ class TrainingPipeline:
             self.s3_sync.sync_folder_to_s3(folder = SAVED_MODEL_DIR,aws_buket_url=aws_buket_url)
         except Exception as e:
             raise CourseRecomException(e,sys)
-        
+      """  
 
     def run_pipeline(self):
         try:
+            logging.info("starting the pipeline")
             TrainingPipeline.is_pipeline_running = True
 
             data_ingestion_artifact:DataIngestionArtifact = self.start_data_ingestion()
+            logging.info("data ingestion completed")
             data_validation_artifact:DataValidationArtifact = self.start_data_validation(data_ingestion_artifact = data_ingestion_artifact)
+            logging.info("data validation completed")
             data_transformation_artifact: DataTransformationArtifact = self.start_data_transformation(data_validation_artifact = data_validation_artifact)
+            logging.info("data transformation completed")
             model_trainer_artifact: ModelTrainerArtifact = self.start_model_trainer(data_transformation_artifact = data_transformation_artifact)
             model_pusher_artifact: ModelPusherArtifact = self.start_model_pusher(model_trainer_artifact = model_trainer_artifact)
 
+            logging.info("model saved")
+            
+
             TrainingPipeline.is_pipeline_running = False
-            self.sync_artifact_dir_to_s3()
-            self.sync_saved_model_to_s3()
+            ##self.sync_artifact_dir_to_s3()
+            ##self.sync_saved_model_to_s3()
 
         except Exception as e:
-            self.sync_artifact_dir_to_s3()
+            ###self.sync_artifact_dir_to_s3()
             TrainingPipeline.is_pipeline_running = False
             raise CourseRecomException(e, sys)
-
+ 
 
 
         
-        
+     
         
 
 

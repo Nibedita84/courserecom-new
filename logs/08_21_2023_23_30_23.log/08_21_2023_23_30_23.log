@@ -1,7 +1,0 @@
-[2023-08-21 23:30:23,655 ] 23 root - INFO - saving data into the feature store
-[2023-08-21 23:30:23,655 ] 15 root - INFO - create class object
-[2023-08-21 23:30:26,241 ] 32 root - INFO - saved the data to the feature store file
-[2023-08-21 23:30:26,252 ] 64 root - INFO - validating number of columns in the dataframe
-[2023-08-21 23:30:26,252 ] 29 root - INFO - required number of columns: 19
-[2023-08-21 23:30:26,252 ] 30 root - INFO - columns in the dataframe: 19
-[2023-08-21 23:30:26,262 ] 75 root - INFO - Data validation artifact: DataValidationArtifact(validation_status=True, valid_file_path='artifact/08-21-2023_23_30_23/data_validation/validated', valid_file_name='artifact/08-21-2023_23_30_23/data_validation/validated/valid_data.csv')

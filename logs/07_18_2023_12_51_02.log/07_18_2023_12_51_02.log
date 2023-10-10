@@ -1,4 +1,0 @@
-[2023-07-18 12:51:03,742 ] 22 root - INFO - starting data ingestion
-[2023-07-18 12:51:03,744 ] 23 root - INFO - saving data into the feature store
-[2023-07-18 12:51:03,744 ] 15 root - INFO - create class object
-[2023-07-18 12:51:05,350 ] 32 root - INFO - saved the data to the feature store file
