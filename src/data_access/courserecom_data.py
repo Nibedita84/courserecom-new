@@ -4,6 +4,7 @@ import json
 from bs4 import BeautifulSoup
 import sys, os
 from src.logger import logging
+import pickle
 
 import requests
 from src.exception import CourseRecomException
@@ -15,9 +16,18 @@ class CourseRecomData:
             logging.info(f'create class object')
         except Exception as e:
             raise CourseRecomException(e, sys)
+        
+
+    def scrape_and_save_to_dataframe(self, link):
+        try:
+            data = pd.DataFrame(pickle.load(open('/Users/Nivi/Documents/courserecom-new/courses.pkl','rb')))
+            return data
+        except Exception as e:
+            raise CourseRecomException(e,sys)
+
     
 
-    def scrape_and_save_to_dataframe(self, link): 
+""" def scrape_and_save_to_dataframe(self, link): 
         try:
             res = requests.get(link) 
             ###txt = res.text
@@ -34,7 +44,9 @@ class CourseRecomData:
 
             return modified_data
         except Exception as e:
-            raise CourseRecomException(e, sys)
+            raise CourseRecomException(e, sys) """
+
+    
         
 
 

@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/ndeka/Downloads/Course Recommender/venv/bin/python" "$0" "$@"
+'''exec' "/Users/Nivi/Documents/courserecom-new/venv/bin/python" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

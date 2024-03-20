@@ -4,6 +4,7 @@ SAVED_MODEL_DIR =os.path.join("saved_models")
 MODEL_FILE_NAME: str = "model.pkl"
 ##PROCESSED_DATA: str = "extracted_data.csv"
 ##FETCHED_DATA: str = "fetched_data"
+MAIN_DIR_PATH = "/Users/Nivi/Documents/courserecom-new"
 
 ### Defining common constant variables for training Pipeline
 DATA_LINK = 'https://ineuron.ai/courses'

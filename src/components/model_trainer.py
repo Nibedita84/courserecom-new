@@ -16,6 +16,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os, sys
 import pandas as pd
 import pickle
+import dill 
 
 
 class ModelTrainer:
@@ -36,8 +37,9 @@ class ModelTrainer:
             return CourseRecomException(e, sys)
 
 
-    def train_model(self, train_data):
+    def train_model(self, file_path):
         try:
+            train_data = ModelTrainer.read_data(file_path)
             cv = CountVectorizer(max_features=5000,stop_words='english')
             vector = cv.fit_transform(train_data['tags1']).toarray()
 
@@ -54,11 +56,17 @@ class ModelTrainer:
             model = self.train_model(training_file_path)
             model_dir_path = os.path.dirname(self.model_trainer_config.data_trainer_file)
             os.makedirs(model_dir_path, exist_ok = True)
-            pickle.dump(model, open(self.model_trainer_config.data_trainer_file, 'wb'))   ##saving the model
+            with open(self.model_trainer_config.data_trainer_file, "wb") as file_obj:
+                dill.dump(model, file_obj)   ##saving the model
         
             model_trainer_artifact = ModelTrainerArtifact(trained_model_dir = self.model_trainer_config.data_trainer_file)
 
             logging.info("model training completed")
+
+            with open(self.model_trainer_config.data_trainer_other_file, "wb") as file_obj2:
+                dill.dump(model, file_obj2)
+
+
 
             return model_trainer_artifact
         except Exception as e:

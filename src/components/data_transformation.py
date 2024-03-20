@@ -75,6 +75,7 @@ class DataTransformation:
             finaldf['tags'] = finaldf['description'] + finaldf['instructorsDetails1'] +finaldf['learning']
             finaldf['tags1'] = [' '.join(map(str, l)) for l in finaldf['tags']]
             finaldf = finaldf.drop(['instructorsDetails1', 'description','learning'], axis = 1)
+            finaldf.rename(columns = {'index':'Title'}, inplace = True)
 
             logging.info("file read and transformed. Saving the transformed data file")
 
@@ -84,10 +85,13 @@ class DataTransformation:
                 os.makedirs(dir_path,exist_ok=True)
                 ##fullname = os.path.join(dir_path, self.data_validation_config.valid_file_name)   
                 finaldf.to_csv(self.data_transformation_config.data_transformation_file_name, index = False, header = True)
+                finaldf.to_csv(self.data_transformation_config.data_transformation_other_file_name, index = False, header = True)
 
             data_transformation_artifact = DataTransformationArtifact(transformed_data_path = self.data_transformation_config.data_transformation_dir, transformed_file = self.data_transformation_config.data_transformation_file_name)
 
             logging.info("data transformation complete and file saved")
+
+            
 
             return data_transformation_artifact
 

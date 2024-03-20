@@ -1,0 +1,22 @@
+[2024-03-20 19:15:43,486 ] 105 root - INFO - starting the pipeline
+[2024-03-20 19:15:43,486 ] 39 root - INFO - Starting Data Ingestion
+[2024-03-20 19:15:43,486 ] 24 root - INFO - saving data into the feature store
+[2024-03-20 19:15:43,486 ] 16 root - INFO - create class object
+[2024-03-20 19:15:43,502 ] 33 root - INFO - saved the data to the feature store file
+[2024-03-20 19:15:43,507 ] 36 root - INFO - scraped data saved
+[2024-03-20 19:15:43,507 ] 42 root - INFO - Data Ingestion completed and artifact: DataIngestionArtifact(data_file_path='artifact/03-20-2024_19_15_43/data_ingestion/feature_store/courserecom.csv')
+[2024-03-20 19:15:43,507 ] 109 root - INFO - data ingestion completed
+[2024-03-20 19:15:43,516 ] 64 root - INFO - validating number of columns in the dataframe
+[2024-03-20 19:15:43,516 ] 29 root - INFO - required number of columns: 19
+[2024-03-20 19:15:43,516 ] 30 root - INFO - columns in the dataframe: 19
+[2024-03-20 19:15:43,525 ] 75 root - INFO - Data validation artifact: DataValidationArtifact(validation_status=True, valid_file_path='artifact/03-20-2024_19_15_43/data_validation/validated', valid_file_name='artifact/03-20-2024_19_15_43/data_validation/validated/valid_data.csv')
+[2024-03-20 19:15:43,525 ] 111 root - INFO - data validation completed
+[2024-03-20 19:15:43,525 ] 68 root - INFO - reading the data file
+[2024-03-20 19:15:43,561 ] 80 root - INFO - file read and transformed. Saving the transformed data file
+[2024-03-20 19:15:43,567 ] 91 root - INFO - data transformation complete and file saved
+[2024-03-20 19:15:43,567 ] 113 root - INFO - data transformation completed
+[2024-03-20 19:15:43,567 ] 54 root - INFO - starting model training
+[2024-03-20 19:15:43,605 ] 64 root - INFO - model training completed
+[2024-03-20 19:15:43,608 ] 37 root - INFO - initiating model pushing to save the model
+[2024-03-20 19:15:43,611 ] 50 root - INFO - successfully saved the model in the location
+[2024-03-20 19:15:43,611 ] 117 root - INFO - model saved
